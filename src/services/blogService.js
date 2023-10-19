@@ -28,9 +28,9 @@ const getHeaders = (token) => ({
   Authorization: `Bearer ${token}`,
 });
 
-export const fetchArticles = (page, limit, token = '') => {
+export const fetchArticles = (offset = 1, limit = 5, token = '') => {
   return async (dispatch) =>
-    axios(`${baseUrl}/articles?&limit=${limit}&offset=${(page - 1) * limit}`, { headers: getHeaders(token) })
+    axios(`${baseUrl}/articles?&limit=${limit}&offset=${(offset - 1) * limit}`, { headers: getHeaders(token) })
       .then((res) => {
         dispatch(addArticles(getArticleItems(res.data.articles)));
         dispatch(addArticlesCount(res.data.articlesCount));

@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { fetchArticles } from '../../services/blogService';
-import { setLimit, setPage } from '../../store/slices/articles-slice';
+import { setPage } from '../../store/slices/articles-slice';
 import { goHome, setLocation, setStatus } from '../../store/slices/status-slice';
 import SingleArticle from '../Article/SingleArticle/SingleArticle';
 
@@ -61,8 +61,6 @@ function ArticlesList() {
   };
 
   const content = showContent(status);
-
-  // eslint-disable-next-line no-shadow
   const onPaginationChange = (page) => {
     dispatch(setPage(page));
     const data = {
@@ -71,7 +69,6 @@ function ArticlesList() {
       page: Number(localStorage.getItem('page')),
     };
     localStorage.setItem('page', page);
-    dispatch(setLimit(limit));
     dispatch(fetchArticles(data));
   };
 
@@ -86,8 +83,7 @@ function ArticlesList() {
           pageSize={limit}
           pageSizeOptions={[5, 10, 20, 40, 100, 500]}
           total={articlesCount}
-          /* eslint-disable-next-line no-shadow */
-          onChange={(PG, pageSize) => onPaginationChange(PG, pageSize)}
+          onChange={(PG) => onPaginationChange(PG)}
         />
       )}
     </div>
