@@ -17,7 +17,9 @@ function Header() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { token } = user;
-  const avatar = user.image ? user.image : 'https://static.productionready.io/images/smiley-cyrus.jpg';
+  const avatar = user.image
+    ? user.image
+    : 'https://media.istockphoto.com/id/1124532572/vector/big-smile-emoticon-with-thumbs-up.jpg?s=612x612&w=0&k=20&c=9DJwHpzMgBAkAYFAPVIvkjNKNN8tHZPlVFy5-d1uLjc=';
 
   const onLogOut = () => {
     localStorage.removeItem('user');
